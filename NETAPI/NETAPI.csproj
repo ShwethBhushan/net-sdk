@@ -44,6 +44,7 @@
     <Compile Include="Exception\NotFoundException.cs" />
     <Compile Include="Exception\PaymentRequiredException .cs" />
     <Compile Include="Exception\ServerException.cs" />
+    <Compile Include="Exception\ValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
