@@ -47,7 +47,9 @@
     <Compile Include="Exception\ValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\Account.cs" />
+    <Compile Include="Resource\CallerId.cs" />
     <Compile Include="Resource\CallRecipient.cs" />
+    <Compile Include="Resource\Contact.cs" />
     <Compile Include="Resource\DMCResource.cs" />
   </ItemGroup>
   <ItemGroup>
