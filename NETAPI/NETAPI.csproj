@@ -49,6 +49,9 @@
     <Compile Include="Resource\Account.cs" />
     <Compile Include="Resource\CallRecipient.cs" />
     <Compile Include="Resource\DMCResource.cs" />
+    <Compile Include="Resource\Group.cs" />
+    <Compile Include="Resource\Keyword.cs" />
+    <Compile Include="Resource\Recording.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
