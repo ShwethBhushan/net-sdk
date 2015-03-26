@@ -22,7 +22,5 @@ namespace DialMyCalls.Resource
             CreatedAt = GetData<DateTime>(data, "created_at");
             UpdatedAt = GetData<DateTime>(data, "updated_at");
         }
-
-
     }
 }

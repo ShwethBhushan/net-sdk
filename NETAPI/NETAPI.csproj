@@ -51,7 +51,11 @@
     <Compile Include="Resource\DMCResource.cs" />
     <Compile Include="Resource\Group.cs" />
     <Compile Include="Resource\Keyword.cs" />
+    <Compile Include="Resource\Recipient.cs" />
     <Compile Include="Resource\Recording.cs" />
+    <Compile Include="Resource\Service.cs" />
+    <Compile Include="Resource\TextRecipient.cs" />
+    <Compile Include="Resource\VanityNumber.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
