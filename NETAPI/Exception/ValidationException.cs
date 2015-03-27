@@ -10,8 +10,8 @@ namespace DialMyCalls.Exception
 {
     public class ValidationException : HttpException
     {
-        public ValidationException()
-            : base((int)(HttpStatusCode.BadRequest), "Validation Exception") {
+        public ValidationException(string message)
+            : base((int)(HttpStatusCode.BadRequest), message) {
         }
     }
 }

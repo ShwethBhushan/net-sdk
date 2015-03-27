@@ -11,7 +11,7 @@ namespace DialMyCalls.Exception
     public class AuthenticationException : HttpException
     {
         public AuthenticationException()
-            : base((int)(HttpStatusCode.Unauthorized), "Authorization Exception") {
+            : base((int)(HttpStatusCode.Unauthorized), "Failed authentication") {
         }
 
     }

@@ -11,7 +11,7 @@ namespace DialMyCalls.Exception
     public class NotFoundException : HttpException
     {
         public NotFoundException()
-            : base((int)(HttpStatusCode.NotFound), "Not Found Exception") {
+            : base((int)(HttpStatusCode.NotFound), "Resource Not Found") {
         }
     }
 }

@@ -11,7 +11,7 @@ namespace DialMyCalls.Exception
     public class PaymentRequiredException : HttpException
     {
         public PaymentRequiredException()
-            : base((int)(HttpStatusCode.PaymentRequired), "Payment Required Exception") {
+            : base((int)(HttpStatusCode.PaymentRequired), "Payment required.") {
         }
     }
 }

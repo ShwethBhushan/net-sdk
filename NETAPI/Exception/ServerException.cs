@@ -11,7 +11,7 @@ namespace DialMyCalls.Exception
     public class ServerException : HttpException
     {
         public ServerException()
-            : base((int)HttpStatusCode.InternalServerError, "Server Exception") {
+            : base((int)HttpStatusCode.InternalServerError, "Server error.") {
         }
     }
 }
