@@ -29,5 +29,23 @@ namespace DialMyCalls.Resource
             }
         }
 
+        protected static Nullable<bool> GetDataBool(NameValueCollection data, string key) {
+            if (FindWordsIn(data[key], WordsTRUE)) {
+                return true;
+            }
+            else if (FindWordsIn(data[key], WordsFALSE)) {
+                return false;
+            }
+            else {
+                return null;
+            }
+        }
+
+        private static bool FindWordsIn(string val, string[] words) {
+            return (words.FirstOrDefault(f => f == val.ToLower()) != null);
+        }
+
+        protected const string[] WordsTRUE = { "1", "true", "on", "yes" };
+        protected const string[] WordsFALSE = { "0", "false", "off", "no" };
     }
 }
