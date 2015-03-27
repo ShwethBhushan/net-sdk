@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="Exception\AuthenticationException.cs" />
     <Compile Include="Exception\NotFoundException.cs" />
     <Compile Include="Exception\PaymentRequiredException .cs" />
