@@ -39,7 +39,7 @@ namespace DialMyCalls
          *
          * @return boolean|array
          */
-        public NameValueCollection Request(string method, string endpoint, NameValueCollection data, Pagination pagination = null)
+        public NameValueCollection Request(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null)
         {
             var request = WebRequest.CreateHttp(ApiUrl + endpoint);
             request.Headers.Add("Content-Type", "application/json");
@@ -47,7 +47,7 @@ namespace DialMyCalls
             if (pagination != null) {
                 request.Headers.Add("Range", string.Format("records={0}-{1}", pagination.Start, pagination.End));
             }
-            string sb = JsonConvert.SerializeObject(data.AllKeys.ToDictionary(k => k, k => data[k]));
+            string sb = JsonConvert.SerializeObject(data);
             request.Method = method;
             Byte[] bt = Encoding.UTF8.GetBytes(sb);
             Stream st = request.GetRequestStream();

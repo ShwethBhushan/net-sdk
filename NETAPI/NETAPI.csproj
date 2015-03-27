@@ -63,10 +63,11 @@
     <Compile Include="Resource\Service.cs" />
     <Compile Include="Resource\TextRecipient.cs" />
     <Compile Include="Resource\VanityNumber.cs" />
+    <Compile Include="Service\Account.cs" />
+    <Compile Include="Service\Base.cs" />
+    <Compile Include="Service\Call.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
