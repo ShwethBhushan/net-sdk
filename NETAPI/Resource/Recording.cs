@@ -18,7 +18,7 @@ namespace DialMyCalls.Resource
         public DateTime? CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        public Recording(NameValueCollection data) {
+        public Recording(IDictionary<string, object> data) {
             Id = GetDataString(data, "id");
             Name = GetDataString(data, "name");
             Type = GetDataString(data, "type");

@@ -39,7 +39,7 @@ namespace DialMyCalls
          *
          * @return boolean|array
          */
-        public NameValueCollection Request(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null)
+        public T Request<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T: class
         {
             var request = WebRequest.CreateHttp(ApiUrl + endpoint);
             request.Headers.Add("Content-Type", "application/json");
@@ -58,17 +58,7 @@ namespace DialMyCalls
                     Stream stream1 = response.GetResponseStream();
                     StreamReader sr = new StreamReader(stream1);
                     string strsb = sr.ReadToEnd();
-                    var dictionary = JsonConvert.DeserializeObject(strsb, typeof(Dictionary<string, string>)) as Dictionary<string, string>;
-                    if (dictionary != null) {
-                        var result = new NameValueCollection(dictionary.Count());
-                        foreach (var k in dictionary) {
-                            result.Add(k.Key, k.Value);
-                        }
-                        return result;
-                    }
-                    else {
-                        return new NameValueCollection();
-                    }
+                    return JsonConvert.DeserializeObject(strsb, typeof(T)) as T;
                 }
             }
             catch (HttpException e) {
@@ -88,10 +78,7 @@ namespace DialMyCalls
             return null;
         }
 
-
         private const string API_URL = @"https://{0}@api.dialmycalls.com/2.0/";
-
         private string IntApiKey;
-
     }
 }

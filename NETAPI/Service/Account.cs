@@ -9,9 +9,11 @@ namespace DialMyCalls.Service
 {
     public class Account : Base
     {
+        public Account(Client client) : base(client) {} 
+
         public Resource.Account Get() {
             try {
-                var response = Client.Request("GET", "account");
+                var response = Client.Request<IDictionary<string, object>>("GET", "account");
                 return new Resource.Account(response);    
             }
             catch (HttpException e) {

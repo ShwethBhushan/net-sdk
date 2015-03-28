@@ -10,14 +10,14 @@ namespace DialMyCalls.Resource
     public class Keyword : DMCResource  
     {
         public string Id { get; private set; }
-        public string Keyword { get; private set; }
+        public string KeywordString { get; private set; }
         public string Status { get; private set; }
         public DateTime? CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        public Keyword(NameValueCollection data) {
+        public Keyword(IDictionary<string, object> data) {
             Id = GetDataString(data, "id");
-            Keyword = GetDataString(data, "keyword");
+            KeywordString = GetDataString(data, "keyword");
             Status = GetDataString(data, "Status");
             CreatedAt = GetData<DateTime>(data, "created_at");
             UpdatedAt = GetData<DateTime>(data, "updated_at");

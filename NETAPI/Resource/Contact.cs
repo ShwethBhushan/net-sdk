@@ -16,11 +16,11 @@ namespace DialMyCalls.Resource
         public string Phone { get; private set; }
         public string Extension { get; private set; }
         public string Extra1 { get; private set; }
-        public object Groups { get; private set; }  // TODO: Check type, possible string array
+        public IEnumerable<string> Groups { get; private set; }      
         public DateTime? CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        public Contact(NameValueCollection data) {
+        public Contact(IDictionary<string, object> data) {
             Id = GetDataString(data, "id");
             FirstName = GetDataString(data, "firstname");
             LastName = GetDataString(data, "lastname");
@@ -28,7 +28,7 @@ namespace DialMyCalls.Resource
             Phone = GetDataString(data, "phone");
             Extension = GetDataString(data, "extension");
             Extra1 = GetDataString(data, "extra1");
-            Groups = null; // TODO: Check type and do the call
+            Groups = GetDataObj<IEnumerable<string>>(data, "groups");
             CreatedAt = GetData<DateTime>(data, "created_at");
             UpdatedAt = GetData<DateTime>(data, "updated_at");
         }

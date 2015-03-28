@@ -11,14 +11,14 @@ namespace DialMyCalls.Resource
     {
         public string Extension { get; private set; }
         public int? Duration { get; private set; }
-        public IEnumerable<object> AddOn { get; private set; } // TODO: Check type
+        public IDictionary<string, string> AddOn { get; private set; }
         public int? Attempts { get; private set; }
         public DateTime? CalledAt { get; private set; }
 
-        public CallRecipient(NameValueCollection data) : base(data) {
+        public CallRecipient(IDictionary<string, object> data) : base(data) {
             Extension = GetDataString(data, "extension");
             Duration = GetData<int>(data, "duration");
-            AddOn = null; // TODO : check the type and make appropriate call
+            AddOn = GetDataObj<IDictionary<string, string>>(data, "add_on");
             Attempts = GetData<int>(data, "attempts");
             CalledAt = GetData<DateTime>(data, "called_at");
         }

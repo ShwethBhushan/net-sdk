@@ -19,7 +19,7 @@ namespace DialMyCalls.Resource
         public DateTime? CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        public VanityNumber(NameValueCollection data) {
+        public VanityNumber(IDictionary<string, object> data) {
             Id = GetDataString(data, "id");
             Phone = GetDataString(data, "phone");
             Status = GetDataString(data, "status");

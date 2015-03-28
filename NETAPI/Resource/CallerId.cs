@@ -16,7 +16,7 @@ namespace DialMyCalls.Resource
         public DateTime? CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        public CallerId(NameValueCollection data) {
+        public CallerId(IDictionary<string, object> data) {
             Id = GetDataString(data, "id");
             Name = GetDataString(data, "name");
             Phone = GetDataString(data, "phone");

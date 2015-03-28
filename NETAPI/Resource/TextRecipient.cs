@@ -9,6 +9,6 @@ namespace DialMyCalls.Resource
 {
     public class TextRecipient : Recipient
     {
-        public TextRecipient(NameValueCollection data) : base(data) { } 
+        public TextRecipient(IDictionary<string, object> data) : base(data) { } 
     }
 }

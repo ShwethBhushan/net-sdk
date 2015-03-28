@@ -16,7 +16,7 @@ namespace DialMyCalls.Resource
         public string Status { get; private set; }
         public bool? Successful { get; private set; }
 
-        public Recipient(NameValueCollection data) {
+        public Recipient(IDictionary<string, object> data) {
             FirstName = GetDataString(data, "firstname");
             LastName = GetDataString(data, "lastname");
             Email = GetDataString(data, "email");

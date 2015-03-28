@@ -17,7 +17,7 @@ namespace DialMyCalls.Resource
         public DateTime? CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        public Service(NameValueCollection data) {
+        public Service(IDictionary<string, object> data) {
             Id = GetDataString(data, "id");
             Name = GetDataString(data, "name");
             IsPendingCancel = GetDataBool(data, "pending_cancel");

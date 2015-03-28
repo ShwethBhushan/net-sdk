@@ -66,6 +66,8 @@
     <Compile Include="Service\Account.cs" />
     <Compile Include="Service\Base.cs" />
     <Compile Include="Service\Call.cs" />
+    <Compile Include="Service\CallerId.cs" />
+    <Compile Include="Service\CallerIds.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

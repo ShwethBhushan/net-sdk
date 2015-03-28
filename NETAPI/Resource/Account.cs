@@ -12,7 +12,7 @@ namespace DialMyCalls.Resource
         public decimal? CreditsAvailable { get; private set; }
         public DateTime? CreatedAt { get; private set; }
 
-        public Account(NameValueCollection data) {
+        public Account(IDictionary<string, object> data) {
             CreditsAvailable = GetData<decimal>(data, "credits_available");
             CreatedAt = GetData<DateTime>(data, "created_at");
         }

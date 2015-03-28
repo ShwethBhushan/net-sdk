@@ -14,7 +14,7 @@ namespace DialMyCalls.Resource
         public DateTime? CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
-        public Group(NameValueCollection data) {
+        public Group(IDictionary<string, object> data) {
             Id = GetDataString(data, "id");
             Name = GetDataString(data, "name");
             CreatedAt = GetData<DateTime>(data, "created_at");
