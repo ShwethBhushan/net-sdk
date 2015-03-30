@@ -15,11 +15,12 @@ namespace DialMyCalls.Service
 
         public IEnumerable<Resource.CallerId> Get() {
             try {
-                return Client.Request<IEnumerable<object>>("GET", "callerids").AsQueryable().Select(o => new Resource.CallerId(o as IDictionary<string, object>)); // TOOD: check Json transformation!
+                return Client.RequestList<Resource.CallerId>("GET", "callreids");
             }
             catch (HttpException e) {
                 Exception = e;
             }
+            return null;
         }
     }
 }

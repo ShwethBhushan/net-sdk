@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Web;
+using DialMyCalls.Resource;
 
 namespace DialMyCalls
 {
@@ -76,6 +77,18 @@ namespace DialMyCalls
                 }
             }
             return null;
+        }
+
+        public IEnumerable<T> RequestList<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T : DMCResource {
+            var requestResult = Request<IEnumerable<object>>(method, endpoint, data, pagination);
+            var result = new List<T> ();
+            if (requestResult != null) {
+                foreach (var o in requestResult) {
+                    var typedO = (T)Activator.CreateInstance(typeof(T), new object[] { o as IDictionary<string, object> });
+                    result.Add(typedO);
+                }
+            }
+            return result;
         }
 
         private const string API_URL = @"https://{0}@api.dialmycalls.com/2.0/";
