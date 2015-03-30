@@ -68,6 +68,18 @@
     <Compile Include="Service\Call.cs" />
     <Compile Include="Service\CallerId.cs" />
     <Compile Include="Service\CallerIds.cs" />
+    <Compile Include="Service\Calls.cs" />
+    <Compile Include="Service\Contact.cs" />
+    <Compile Include="Service\Contacts.cs" />
+    <Compile Include="Service\Group.cs" />
+    <Compile Include="Service\Groups.cs" />
+    <Compile Include="Service\Keyword.cs" />
+    <Compile Include="Service\Keywords.cs" />
+    <Compile Include="Service\Recordings.cs" />
+    <Compile Include="Service\Text.cs" />
+    <Compile Include="Service\Texts.cs" />
+    <Compile Include="Service\VanityNumber.cs" />
+    <Compile Include="Service\VanityNumbers.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
