@@ -87,7 +87,7 @@ namespace DialMyCalls
         }
 
         public IEnumerable<T> RequestList<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T : DMCResource {
-            var requestResult = Request<IEnumerable<object>>(method, endpoint, data, pagination);
+            var requestResult = Request<IEnumerable<object>>(method, endpoint, data, pagination); // TODO: remake serialization
             var result = new List<T> ();
             if (requestResult != null) {
                 foreach (var o in requestResult) {

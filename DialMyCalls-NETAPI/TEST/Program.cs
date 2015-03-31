@@ -9,7 +9,7 @@ namespace TEST
     class Program
     {
         static void Main(string[] args) {
-            bool result = Account.Run();
+            bool result = Account.Run() && Keywords.Run();
             Console.ReadKey();
         
         }
