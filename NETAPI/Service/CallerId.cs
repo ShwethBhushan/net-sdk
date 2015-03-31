@@ -23,7 +23,7 @@ namespace DialMyCalls.Service
                     { "name", name }
                 };
                 var endpoint = verify ? "verify/callerid" : "callerid";
-                return new Resource.CallerId(Client.Request<IDictionary<string, object>>("POST", endpoint, data));
+                return Client.Request<Resource.CallerId>("POST", endpoint, data);
             }
             catch (HttpException e) {
                 Exception = e;

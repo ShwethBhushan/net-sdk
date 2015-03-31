@@ -13,8 +13,7 @@ namespace DialMyCalls.Service
 
         public Resource.Account Get() {
             try {
-                var response = Client.Request<IDictionary<string, object>>("GET", "account");
-                return new Resource.Account(response);    
+                return Client.Request<Resource.Account>("GET", "account");
             }
             catch (HttpException e) {
                 Exception = e;

@@ -25,7 +25,7 @@ namespace DialMyCalls.Service
                     { "add_ons", addOns }
                 };
                 try {
-                    return new Resource.Service(Client.Request<IDictionary<string, object>>("POST", "service/call", data));
+                    return Client.Request<Resource.Service>("POST", "service/call", data);
                 }
                 catch (HttpException e) {
                     Exception = e;

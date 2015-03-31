@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33F65C9C-F1FB-4EEF-8124-11545471F7A1}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{90AC3ED9-3518-4ABC-8125-5DFF7A857D41}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DialMyCalls</RootNamespace>
-    <AssemblyName>NETAPI</AssemblyName>
+    <RootNamespace>TEST</RootNamespace>
+    <AssemblyName>TEST</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,10 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\DialMyCalls-NETAPI\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -43,48 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="Exception\AuthenticationException.cs" />
-    <Compile Include="Exception\NotFoundException.cs" />
-    <Compile Include="Exception\PaymentRequiredException .cs" />
-    <Compile Include="Exception\ServerException.cs" />
-    <Compile Include="Exception\ValidationException.cs" />
-    <Compile Include="Pagination.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource\Account.cs" />
-    <Compile Include="Resource\CallerId.cs" />
-    <Compile Include="Resource\CallRecipient.cs" />
-    <Compile Include="Resource\Contact.cs" />
-    <Compile Include="Resource\DMCResource.cs" />
-    <Compile Include="Resource\Group.cs" />
-    <Compile Include="Resource\Keyword.cs" />
-    <Compile Include="Resource\Recipient.cs" />
-    <Compile Include="Resource\Recording.cs" />
-    <Compile Include="Resource\Service.cs" />
-    <Compile Include="Resource\TextRecipient.cs" />
-    <Compile Include="Resource\VanityNumber.cs" />
-    <Compile Include="Service\Account.cs" />
-    <Compile Include="Service\Base.cs" />
-    <Compile Include="Service\Call.cs" />
-    <Compile Include="Service\CallerId.cs" />
-    <Compile Include="Service\CallerIds.cs" />
-    <Compile Include="Service\Calls.cs" />
-    <Compile Include="Service\Contact.cs" />
-    <Compile Include="Service\Contacts.cs" />
-    <Compile Include="Service\Group.cs" />
-    <Compile Include="Service\Groups.cs" />
-    <Compile Include="Service\Keyword.cs" />
-    <Compile Include="Service\Keywords.cs" />
-    <Compile Include="Service\Recordings.cs" />
-    <Compile Include="Service\Text.cs" />
-    <Compile Include="Service\Texts.cs" />
-    <Compile Include="Service\VanityNumber.cs" />
-    <Compile Include="Service\VanityNumbers.cs" />
+    <Compile Include="TestStorage.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NETAPI\NETAPI.csproj">
+      <Project>{33f65c9c-f1fb-4eef-8124-11545471f7a1}</Project>
+      <Name>NETAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

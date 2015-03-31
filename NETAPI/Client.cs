@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Web;
 using DialMyCalls.Resource;
+using Newtonsoft.Json.Linq;
 
 namespace DialMyCalls
 {
@@ -43,23 +44,29 @@ namespace DialMyCalls
         public T Request<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T: class
         {
             var request = WebRequest.CreateHttp(ApiUrl + endpoint);
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            byte[] encodedByte = System.Text.ASCIIEncoding.ASCII.GetBytes(ApiKey + ":");
+            request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(encodedByte));
             if (pagination != null) {
                 request.Headers.Add("Range", string.Format("records={0}-{1}", pagination.Start, pagination.End));
             }
-            string sb = JsonConvert.SerializeObject(data);
-            request.Method = method;
-            Byte[] bt = Encoding.UTF8.GetBytes(sb);
-            Stream st = request.GetRequestStream();
-            st.Write(bt, 0, bt.Length);
-            st.Close();
+            if (data != null) {
+                string sb = JsonConvert.SerializeObject(data);
+                request.Method = method;
+                Byte[] bt = Encoding.UTF8.GetBytes(sb);
+                Stream st = request.GetRequestStream();
+                st.Write(bt, 0, bt.Length);
+                st.Close();
+            }
             try {
                 using (HttpWebResponse response = request.GetResponse() as HttpWebResponse) {
                     Stream stream1 = response.GetResponseStream();
                     StreamReader sr = new StreamReader(stream1);
                     string strsb = sr.ReadToEnd();
-                    return JsonConvert.DeserializeObject(strsb, typeof(T)) as T;
+                    RequestResult jsonResult = JsonConvert.DeserializeObject(strsb, typeof(RequestResult)) as RequestResult;
+                    var resData = DeserializeToDictionary(jsonResult.results.ToString());
+                    return (T)Activator.CreateInstance(typeof(T), new object[] { resData });
                 }
             }
             catch (HttpException e) {
@@ -91,7 +98,26 @@ namespace DialMyCalls
             return result;
         }
 
+        private Dictionary<string, object> DeserializeToDictionary(string jo) {
+            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(jo);
+            var values2 = new Dictionary<string, object>();
+            foreach (KeyValuePair<string, object> d in values) {
+                if (d.Value is JObject) {
+                    values2.Add(d.Key, DeserializeToDictionary(d.Value.ToString()));
+                }
+                else {
+                    values2.Add(d.Key, d.Value);
+                }
+            }
+            return values2;
+        }
+
         private const string API_URL = @"https://{0}@api.dialmycalls.com/2.0/";
         private string IntApiKey;
+
+        private class RequestResult
+        {
+            public object results;
+        }
     }
 }
