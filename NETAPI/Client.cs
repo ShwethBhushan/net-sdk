@@ -5,11 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.IO;
 using System.Web;
 using DialMyCalls.Resource;
-using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
 
 namespace DialMyCalls
 {
@@ -31,17 +30,28 @@ namespace DialMyCalls
             }
         }
        
-        /*
-         * @throws \Exception
-         *
-         * @param string     $method     HTTP method [GET / POST / PUT / DELETE].
-         * @param string     $endpoint   API endpoint.
-         * @param array      $data       The request body.
-         * @param Pagination $pagination Set pagination values.
-         *
-         * @return boolean|array
-         */
-        public T Request<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T: class
+        public T Request<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T: DMCResource {
+            var serzr = new JavaScriptSerializer();
+            var resData = IntRequest(method, endpoint, data, pagination);
+            var dict = serzr.Deserialize<RequestResultDict>(resData).results;
+            return (T)Activator.CreateInstance(typeof(T), new object[] { dict });
+        }
+
+        public IEnumerable<T> RequestList<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T : DMCResource {
+            var serzr = new JavaScriptSerializer();
+            var resData = IntRequest(method, endpoint, data, pagination);
+            var list = serzr.Deserialize<RequestResultList>(resData).results;
+            var result = new List<T>();
+            if (list != null) {
+                foreach (var o in list) {
+                    var typedO = (T)Activator.CreateInstance(typeof(T), new object[] { o as IDictionary<string, object> });
+                    result.Add(typedO);
+                }
+            }
+            return result;
+        }
+
+        private string IntRequest(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) 
         {
             var request = WebRequest.CreateHttp(ApiUrl + endpoint);
             request.ContentType = "application/json";
@@ -51,8 +61,9 @@ namespace DialMyCalls
             if (pagination != null) {
                 request.Headers.Add("Range", string.Format("records={0}-{1}", pagination.Start, pagination.End));
             }
+            var serializer = new JavaScriptSerializer();
             if (data != null) {
-                string sb = JsonConvert.SerializeObject(data);
+                string sb = serializer.Serialize(data);
                 request.Method = method;
                 Byte[] bt = Encoding.UTF8.GetBytes(sb);
                 Stream st = request.GetRequestStream();
@@ -64,9 +75,7 @@ namespace DialMyCalls
                     Stream stream1 = response.GetResponseStream();
                     StreamReader sr = new StreamReader(stream1);
                     string strsb = sr.ReadToEnd();
-                    RequestResult jsonResult = JsonConvert.DeserializeObject(strsb, typeof(RequestResult)) as RequestResult;
-                    var resData = DeserializeToDictionary(jsonResult.results.ToString());
-                    return (T)Activator.CreateInstance(typeof(T), new object[] { resData });
+                    return strsb;
                 }
             }
             catch (HttpException e) {
@@ -86,38 +95,19 @@ namespace DialMyCalls
             return null;
         }
 
-        public IEnumerable<T> RequestList<T>(string method, string endpoint, IDictionary<string, object> data = null, Pagination pagination = null) where T : DMCResource {
-            var requestResult = Request<IEnumerable<object>>(method, endpoint, data, pagination); // TODO: remake serialization
-            var result = new List<T> ();
-            if (requestResult != null) {
-                foreach (var o in requestResult) {
-                    var typedO = (T)Activator.CreateInstance(typeof(T), new object[] { o as IDictionary<string, object> });
-                    result.Add(typedO);
-                }
-            }
-            return result;
-        }
-
-        private Dictionary<string, object> DeserializeToDictionary(string jo) {
-            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(jo);
-            var values2 = new Dictionary<string, object>();
-            foreach (KeyValuePair<string, object> d in values) {
-                if (d.Value is JObject) {
-                    values2.Add(d.Key, DeserializeToDictionary(d.Value.ToString()));
-                }
-                else {
-                    values2.Add(d.Key, d.Value);
-                }
-            }
-            return values2;
-        }
-
         private const string API_URL = @"https://{0}@api.dialmycalls.com/2.0/";
         private string IntApiKey;
 
-        private class RequestResult
+        private class RequestResultDict
         {
-            public object results;
+            public Dictionary<string, object> results;
         }
+
+        private class RequestResultList
+        {
+            public List<Dictionary<string, object>> results;
+        }
+    
+    
     }
 }
