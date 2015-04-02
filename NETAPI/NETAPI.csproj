@@ -69,6 +69,7 @@
     <Compile Include="Service\Calls.cs" />
     <Compile Include="Service\Contact.cs" />
     <Compile Include="Service\Contacts.cs" />
+    <Compile Include="Service\Recording.cs" />
     <Compile Include="Service\Group.cs" />
     <Compile Include="Service\Groups.cs" />
     <Compile Include="Service\Keyword.cs" />
@@ -82,7 +83,6 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
