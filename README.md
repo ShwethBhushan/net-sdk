@@ -9,7 +9,7 @@ Requirements
 
 Composer Installation
 ---------------------
-The DialMyCalls.com NET SDK can be included as an assemblhy into your project. 
+The DialMyCalls.com NET SDK can be included as an assembly into your project. 
 Get the source code and add NETAPI assembly into your solution. 
 Include DialMyCalls namespase.
 For calling a service create a Client:
