@@ -10,6 +10,7 @@ namespace TEST
     public static class Text
     {
         public static bool Run(Client client) {
+            Console.WriteLine("Text create...");
             var svc = new DialMyCalls.Service.Text(client);
             if (TestStorage.Contacts == null || TestStorage.Contacts.Count < 1) {
                 Console.WriteLine("Please add at least one Contact");
@@ -19,7 +20,6 @@ namespace TEST
                 Console.WriteLine("Keyword Id should not be empty");
                 return false;
             }
-            Console.WriteLine("Text create...");
             var txt = svc.Create("MyText", TestStorage.KeywordId, new List<string>() { "this is my message" }, DateTime.Now.AddMonths(1), false, "", TestStorage.Contacts);
             if (txt != null) {
                 Console.WriteLine("Ok. Check...");
