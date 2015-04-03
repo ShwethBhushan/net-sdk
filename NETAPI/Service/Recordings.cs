@@ -13,7 +13,7 @@ namespace DialMyCalls.Service
             : base(client) {
         }
 
-        public IEnumerable<Resource.Recording> Get(Pagination pagination) {
+        public IEnumerable<Resource.Recording> Get(Pagination pagination = null) {
             try {
                 return Client.RequestList<Resource.Recording>("GET", "recordings", null, pagination);
             }

@@ -25,12 +25,42 @@ namespace DialMyCalls.Service
                     { "add_ons", addOns }
                 };
                 try {
-                    return Client.Request<Resource.Service>("POST", "service/call", data);
+                    return Client.Request<Resource.Service>("POST", @"service/call", data);
                 }
                 catch (HttpException e) {
                     Exception = e;
                 }
                 return null;
+        }
+
+        public Resource.Service Get(string id) {
+            try {
+                return Client.Request<Resource.Service>("GET", @"service/call/" + id);
+            }
+            catch (HttpException e) {
+                Exception = e;
+            }
+            return null;
+        }
+
+        public Resource.Service Cancel(string id) {
+            try {
+                return Client.Request<Resource.Service>("DELETE", @"service/call/" + id);
+            }
+            catch (HttpException e) {
+                Exception = e;
+            }
+            return null;
+        }
+
+        public IEnumerable<Resource.CallRecipient> GetRecipients(string id) {
+            try {
+                return Client.RequestList<Resource.CallRecipient>("GET", @"service/call/" + id + @"/recipients") ;
+            }
+            catch (HttpException e) {
+                Exception = e;
+            }
+            return null;
         }
     }
 }
