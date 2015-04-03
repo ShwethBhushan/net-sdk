@@ -12,18 +12,18 @@ namespace TEST
         public static bool Run() {
             Console.WriteLine("Getting Keywords...");
             Client client = new Client(Config.APIKey);
-            var svc = new DialMyCalls.Service.Keywords(client);
-            var kwds = svc.Get();
+            var svc2 = new DialMyCalls.Service.Keywords(client);
+            var kwds = svc2.Get();
             if (kwds != null) {
                 Console.WriteLine("Ok. Keywords:");
-                foreach (var kw in kwds) {
-                    Console.WriteLine("Word: " + kw.KeywordString + "  Id: " + kw.Id + "  Status: " + kw.Status + "  Created at: " + kw.CreatedAt + "   Updated at: " + kw.UpdatedAt);
+                foreach (var kw1 in kwds) {
+                    Console.WriteLine("Keyword string: " + kw1.KeywordString + "  Id: " + kw1.Id + "  Status: " + kw1.Status + "  Created at: " + kw1.CreatedAt + "   Updated at: " + kw1.UpdatedAt);
                 }
                 Console.WriteLine("---");
                 return true;
             }
             else {
-                Console.WriteLine("ERROR. Exception message: " + svc.Exception);
+                Console.WriteLine("ERROR. Exception message: " + svc2.Exception);
                 return false;
             }
         }

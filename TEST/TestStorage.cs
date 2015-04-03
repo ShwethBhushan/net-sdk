@@ -11,5 +11,7 @@ namespace TEST
     {
         public static string CallerIdId { get; set; }
         public static string RecordingId { get; set; }
+        public static string KeywordId { get; set; }
+        public static List<string> Contacts { get; set; }
     }
 }
