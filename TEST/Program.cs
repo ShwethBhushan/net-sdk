@@ -11,15 +11,15 @@ namespace TEST
     {
         static void Main(string[] args) {
             var client = new Client(Config.APIKey);
-            bool result = Account.Run(client) &&
-                CallerId.Run(client) &&
-                Recording.Run(client) &&
-                Keyword.Run(client) &&
-                Contact.Run(client) &&
-                Group.Run(client) &&
-                VanityNumber.Run(client) &&
-                Call.Run(client) &&
-                Text.Run(client);
+            Account.Run(client);
+            CallerId.Run(client);
+            Recording.Run(client);
+            Keyword.Run(client);
+            Contact.Run(client);
+            Group.Run(client);
+            VanityNumber.Run(client);
+            Call.Run(client);
+            Text.Run(client);
             Console.ReadKey();
         }
     }

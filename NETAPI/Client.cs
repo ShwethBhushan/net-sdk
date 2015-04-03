@@ -92,6 +92,21 @@ namespace DialMyCalls
                         throw new Exception.ServerException();
                 }
             }
+            catch (WebException e) {
+                HttpWebResponse res = (HttpWebResponse)e.Response;
+                switch (res.StatusCode) {
+                    case HttpStatusCode.BadRequest:
+                        throw new Exception.ValidationException(e.Message);
+                    case HttpStatusCode.Unauthorized:
+                        throw new Exception.AuthenticationException();
+                    case HttpStatusCode.PaymentRequired:
+                        throw new Exception.PaymentRequiredException();
+                    case HttpStatusCode.NotFound:
+                        throw new Exception.NotFoundException();
+                    case HttpStatusCode.InternalServerError:
+                        throw new Exception.ServerException();
+                }
+            }
             return null;
         }
 
