@@ -10,7 +10,7 @@ namespace DialMyCalls.Resource
     public class DMCResource
     {
         protected static Nullable<T> GetData<T>(IDictionary<string, object> data, string key) where T: struct {
-            if (data[key] != null) {
+            if (data.ContainsKey(key)) {
                 try {
                     return (T)Convert.ChangeType(data[key].ToString(), typeof(T));
                 }
@@ -21,11 +21,16 @@ namespace DialMyCalls.Resource
         }
 
         protected static T GetDataObj<T>(IDictionary<string, object> data, string key) where T: class {
-            return data[key] as T;
+            if (data.ContainsKey(key)) {
+                return data[key] as T;
+            }
+            else {
+                return null;
+            }
         }
 
         protected static string GetDataString(IDictionary<string, object> data, string key) {
-            if (!string.IsNullOrEmpty(data[key].ToString())) {
+            if (data.ContainsKey(key) && !string.IsNullOrEmpty(data[key].ToString())) {
                 return data[key].ToString();
             }
             else {
@@ -34,13 +39,15 @@ namespace DialMyCalls.Resource
         }
 
         protected static Nullable<bool> GetDataBool(IDictionary<string, object> data, string key) {
-            string strVal = data[key].ToString();
-            if (!string.IsNullOrEmpty(strVal)) {
-                if (FindWordsIn(strVal, WordsTRUE)) {
-                    return true;
-                }
-                else if (FindWordsIn(strVal, WordsFALSE)) {
-                    return false;
+            if (data.ContainsKey(key)) {
+                string strVal = data[key].ToString();
+                if (!string.IsNullOrEmpty(strVal)) {
+                    if (FindWordsIn(strVal, WordsTRUE)) {
+                        return true;
+                    }
+                    else if (FindWordsIn(strVal, WordsFALSE)) {
+                        return false;
+                    }
                 }
             }
             return null;

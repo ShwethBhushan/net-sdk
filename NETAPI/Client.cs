@@ -61,10 +61,11 @@ namespace DialMyCalls
             if (pagination != null) {
                 request.Headers.Add("Range", string.Format("records={0}-{1}", pagination.Start, pagination.End));
             }
+            request.Method = method;
             var serializer = new JavaScriptSerializer();
             if (data != null) {
                 string sb = serializer.Serialize(data);
-                request.Method = method;
+                
                 Byte[] bt = Encoding.UTF8.GetBytes(sb);
                 Stream st = request.GetRequestStream();
                 st.Write(bt, 0, bt.Length);
