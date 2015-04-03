@@ -9,9 +9,8 @@ namespace TEST
 {
     public static class Account
     {
-        public static bool Run() {
+        public static bool Run(Client client) {
             Console.WriteLine("Getting Account for key...");
-            Client client = new Client(Config.APIKey);
             var svc = new DialMyCalls.Service.Account(client);
             var acc = svc.Get();
             if (acc != null) {

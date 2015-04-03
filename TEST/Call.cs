@@ -9,11 +9,10 @@ namespace TEST
 {
     public static class Call
     {
-        public static bool Run() {
+        public static bool Run(Client client) {
             Console.WriteLine("Generating call..");
-            Client client = new Client(Config.APIKey);
             var svc = new DialMyCalls.Service.Call(client);
-            var call = svc.Create("Test Call", TestStorage.CallerIdId, TestStorage.RecordingId, DateTime.Now.AddMonths(1), false, false, false, new List<string>() { "5555555555" }, new Dictionary<string, string>());
+            var call = svc.Create("MyCall", TestStorage.CallerIdId, TestStorage.RecordingId, DateTime.Now.AddMonths(1), false, false, false, TestStorage.Contacts, null);
             if (call != null) {
                 Console.WriteLine("Ok. Checking... ");
                 var svc2 = new DialMyCalls.Service.Calls(client);

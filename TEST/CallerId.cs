@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DialMyCalls;
 
 namespace TEST
 {
     public static class CallerId
     {
-        public static bool Run() {
-            var client = new DialMyCalls.Client(Config.APIKey);
+        public static bool Run(Client client) {
             var svc = new DialMyCalls.Service.CallerId(client);
             Console.WriteLine("Creating CallerId...");
-            svc.Add("444444444", "MyCallerId", true);
+            var callerId = svc.Add("4444444444", "MyCallerId", true);
+            TestStorage.CallerIdId = callerId.Id;
             var svc2 = new DialMyCalls.Service.CallerIds(client);
             Console.WriteLine("OK. Enumerating CallerId:");
             var callerIds = svc2.Get();
             if (callerIds != null) {
-                foreach (var callerId in callerIds) {
-                    Console.WriteLine("Caller Id ID:    " + callerId.Id);
-                    Console.WriteLine("          Name:  " + callerId.Name);
-                    Console.WriteLine("          Phone: " + callerId.Phone);
-                    if (callerId.Name == "MyCallerId") {
-                        TestStorage.CallerIdId = callerId.Id;
-                    }
+                foreach (var callerId1 in callerIds) {
+                    Console.WriteLine("Caller Id ID:    " + callerId1.Id);
+                    Console.WriteLine("          Name:  " + callerId1.Name);
+                    Console.WriteLine("          Phone: " + callerId1.Phone);
                 }
                 Console.WriteLine("---");
                 return true;

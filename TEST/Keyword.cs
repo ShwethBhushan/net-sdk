@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace TEST
 {
-    public class Keywords
+    public static class Keyword
     {
-        public static bool Run() {
+        public static bool Run(Client client) {
             Console.WriteLine("Getting Keywords...");
-            Client client = new Client(Config.APIKey);
             var svc2 = new DialMyCalls.Service.Keywords(client);
             var kwds = svc2.Get();
             if (kwds != null) {

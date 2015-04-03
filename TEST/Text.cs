@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DialMyCalls;
 
 namespace TEST
 {
-    public class Text
+    public static class Text
     {
-        public bool Run() {
-            var client = new DialMyCalls.Client(Config.APIKey);
+        public static bool Run(Client client) {
             var svc = new DialMyCalls.Service.Text(client);
             if (TestStorage.Contacts == null || TestStorage.Contacts.Count < 1) {
                 Console.WriteLine("Please add at least one Contact");

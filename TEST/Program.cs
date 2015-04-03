@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DialMyCalls;
 
 namespace TEST
 {
     class Program
     {
         static void Main(string[] args) {
-            bool result = Account.Run() && CallerId.Run() && Recording.Run() && Keywords.Run();
+            var client = new Client(Config.APIKey);
+            bool result = Account.Run(client) &&
+                CallerId.Run(client) &&
+                Recording.Run(client) &&
+                Keyword.Run(client) &&
+                Contact.Run(client) &&
+                Group.Run(client) &&
+                VanityNumber.Run(client) &&
+                Call.Run(client) &&
+                Text.Run(client);
             Console.ReadKey();
-        
         }
     }
 }

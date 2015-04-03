@@ -15,7 +15,7 @@ namespace DialMyCalls.Service
 
         public IEnumerable<Resource.CallerId> Get() {
             try {
-                return Client.RequestList<Resource.CallerId>("GET", "callreids");
+                return Client.RequestList<Resource.CallerId>("GET", "callerids");
             }
             catch (HttpException e) {
                 Exception = e;
