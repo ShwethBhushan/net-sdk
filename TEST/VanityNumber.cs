@@ -14,7 +14,7 @@ namespace TEST
             var svc2 = new DialMyCalls.Service.VanityNumbers(client);
             var VanityNumbers = svc2.Get();
             if (VanityNumbers != null) {
-                Console.WriteLine("Ok. Enumerating contracts...");
+                Console.WriteLine("Ok. Enumerating Vanity Numbers...");
                 foreach (var VanityNumber1 in VanityNumbers) {
                     Console.WriteLine("VanityNumber: {0}", VanityNumber1.Phone);
                     svc.Delete(VanityNumber1.Id);

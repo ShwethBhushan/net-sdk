@@ -12,7 +12,7 @@ namespace TEST
         public static bool Run(Client client) {
             Console.WriteLine("Generating call..");
             var svc = new DialMyCalls.Service.Call(client);
-            var call = svc.Create("MyCall", TestStorage.CallerIdId, TestStorage.RecordingId, DateTime.Now.AddMonths(1), false, false, false, TestStorage.Contacts, null);
+            var call = svc.Create("MyCall", TestStorage.CallerIdId, TestStorage.RecordingId, DateTime.Now, false, false, false, TestStorage.Contacts, null);
             if (call != null) {
                 Console.WriteLine("Ok. Checking... ");
                 var svc2 = new DialMyCalls.Service.Calls(client);

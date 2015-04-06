@@ -12,12 +12,13 @@ namespace DialMyCalls.Service
         public Call(Client client) : base(client) {} 
 
         public Resource.Service Create(string name, string callerIdId, string recordingId,
-            DateTime sendAt, bool sendImmediately, bool useAmd, bool sendEmail, IEnumerable<string> contacts,
+            DateTime sendAt, bool sendImmediately, bool useAmd, bool sendEmail, IEnumerable<Resource.ContactInfo> contacts,
             IDictionary<string, string> addOns) {
                 var data = new Dictionary<string, object>() {
                     { "name",  name },
                     { "callerid_id", callerIdId },
                     { "recording_id",  recordingId },
+                    { "send_at", sendAt.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ") },
                     { "send_immediately", sendImmediately },
                     { "use_amd", useAmd },
                     { "send_email",  sendEmail },

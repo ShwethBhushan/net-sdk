@@ -16,7 +16,7 @@ namespace TEST
             bool toAdd = true;
             var Groups = svc2.Get(null);
             if (Groups != null) {
-                Console.WriteLine("Ok. Enumerating contracts...");
+                Console.WriteLine("Ok. Enumerating groups...");
                 foreach (var Group1 in Groups) {
                     Console.WriteLine("Group: {0}", Group1.Name);
                     TestStorage.Groups.Add(Group1.Id);

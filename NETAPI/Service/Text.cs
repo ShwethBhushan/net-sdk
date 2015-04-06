@@ -13,7 +13,7 @@ namespace DialMyCalls.Service
             : base(client) {
         }
 
-        public Resource.Service Create(string name, string keywordId, IEnumerable<string> messages, DateTime sendAt, bool sendImmediately, string sendEmail, IEnumerable<string> contacts) {
+        public Resource.Service Create(string name, string keywordId, IEnumerable<string> messages, DateTime sendAt, bool sendImmediately, string sendEmail, IEnumerable<Resource.ContactInfo> contacts) {
             string sendAtStr = sendAt.ToString("o");
             var data = new Dictionary<string, object>() {
                 { "name", name },

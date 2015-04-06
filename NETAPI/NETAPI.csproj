@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="DateExtension.cs" />
     <Compile Include="Exception\AuthenticationException.cs" />
     <Compile Include="Exception\NotFoundException.cs" />
     <Compile Include="Exception\PaymentRequiredException .cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Resource\CallerId.cs" />
     <Compile Include="Resource\CallRecipient.cs" />
     <Compile Include="Resource\Contact.cs" />
+    <Compile Include="Resource\ContactInfo.cs" />
     <Compile Include="Resource\DMCResource.cs" />
     <Compile Include="Resource\Group.cs" />
     <Compile Include="Resource\Keyword.cs" />
